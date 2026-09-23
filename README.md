@@ -127,30 +127,6 @@ O protótipo deverá utilizar um dispositivo embarcado capaz de receber comandos
 - Registro das ações executadas e dos eventos meteorológicos.
 - Mecanismos de segurança para evitar acionamentos indevidos.
 
-## Possíveis tecnologias
-
-As tecnologias ainda serão definidas durante o desenvolvimento. Algumas opções são:
-
-- **Backend:** Python, Java ou Node.js.
-- **Análise de dados e IA:** Python, Pandas e bibliotecas de aprendizado de máquina.
-- **Banco de dados:** PostgreSQL, SQLite ou outro banco adequado ao protótipo.
-- **IoT:** ESP32, Raspberry Pi ou microcontrolador equivalente.
-- **Comunicação:** Wi-Fi, Bluetooth, MQTT ou comunicação móvel.
-- **Interface:** aplicação web ou aplicativo mobile.
-- **Notificações:** e-mail, notificações push ou serviço de mensagens.
-
-## Desenvolvimento por etapas
-
-1. Levantamento dos requisitos do produto e do hardware.
-2. Pesquisa e seleção das APIs meteorológicas.
-3. Implementação da coleta e do armazenamento dos dados.
-4. Desenvolvimento da primeira versão do sistema de decisão.
-5. Criação do sistema de notificações.
-6. Montagem do protótipo IoT.
-7. Integração entre o software e o hardware.
-8. Testes em diferentes condições meteorológicas.
-9. Avaliação dos resultados e aperfeiçoamento do modelo.
-
 ## Resultados esperados
 
 Espera-se desenvolver um protótipo capaz de:
