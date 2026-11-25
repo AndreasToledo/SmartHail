@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smarthail.local/schemas/weather-record-v1.json",
+  "title": "SmartHail weather record",
+  "description": "Formato interno comum para observações de sensores e dados meteorológicos.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_id",
+    "source",
+    "source_id",
+    "record_type",
+    "recorded_at",
+    "location",
+    "measures"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "string",
+      "enum": ["sensor", "weather_api"]
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Sensor/device ID ou identificador do provedor."
+    },
+    "record_type": {
+      "type": "string",
+      "enum": ["observation", "forecast"]
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Horário UTC em que a fonte produziu o registro."
+    },
+    "valid_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Instante ao qual a previsão se refere; obrigatório para forecasts."
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["latitude", "longitude"],
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        }
+      }
+    },
+    "measures": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "temperature_c": {
+          "type": "number",
+          "description": "Temperatura em graus Celsius."
+        },
+        "relative_humidity_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "precipitation_probability_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "precipitation_mm_h": {
+          "type": "number",
+          "minimum": 0
+        },
+        "wind_speed_m_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "condition": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "provider_record_id": {
+      "type": "string",
+      "description": "Identificador original do registro, se fornecido pela fonte."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "forecast"
+          }
+        },
+        "required": ["record_type"]
+      },
+      "then": {
+        "required": ["valid_at"]
+      }
+    }
+  ]
+}
